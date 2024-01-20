@@ -27,13 +27,21 @@
             </div>
 
             <div>
-
+            @if ($edit == $todo->id)
+                <x-secondary-button wire:click=''>
+                    Сохранить
+                </x-secondary-button>
+                <x-danger-button>
+                    Отменить
+                </x-danger-button>
+            @else
                 <x-secondary-button wire:click='editTodo({{ $todo->id }})'>
                     Редактировать
                 </x-secondary-button>
                 <x-danger-button>
                     Удалить
                 </x-danger-button>
+                @endif
             </div>
 
         </div>
