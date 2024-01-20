@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repo;
-
+use App\Models\Todo;
 
 class TodoRepo
 {
@@ -13,9 +13,21 @@ class TodoRepo
         }
     }
 
+    public function getTodo($todoId)
+    {
+        return auth()->user()->todos()->find($todoId);
+    }
     public function fetchAll()
     {
         $todos = auth()->user()->todos()->latest()->paginate(15);
         return $todos;
+    }
+
+    public function update($todoId, $editedTodo)
+    {
+        $todo = $this->getTodo($todoId);
+        return $todo->update([
+            'todo' => $editedTodo
+        ]);
     }
 }

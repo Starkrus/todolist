@@ -20,7 +20,7 @@
             </div>
             <div>
                 @if($edit == $todo->id)
-                    <x-text-input class="w-full mr-2"/>
+                    <x-text-input wire:model='editedTodo' class="w-full mr-2"/>
                 @else
                     {{ $todo->todo }}
                 @endif
@@ -28,10 +28,10 @@
 
             <div>
             @if ($edit == $todo->id)
-                <x-secondary-button wire:click=''>
+                <x-secondary-button wire:click='updateTodo({{ $todo->id }})'>
                     Сохранить
                 </x-secondary-button>
-                <x-danger-button>
+                <x-danger-button wire:click='cancelEdit'>
                     Отменить
                 </x-danger-button>
             @else

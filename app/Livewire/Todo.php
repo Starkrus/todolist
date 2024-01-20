@@ -7,6 +7,7 @@ use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+
 class Todo extends Component
 {
     use WithPagination;
@@ -14,6 +15,8 @@ class Todo extends Component
 
     #[Rule('required|min:3')]
     public $todo = '';
+    #[Rule('required|min:3')]
+    public $editedTodo;
     public $edit;
     public function boot(TodoRepo $repo)
     {
@@ -30,6 +33,18 @@ class Todo extends Component
     public function editTodo($todoId)
     {
         $this->edit = $todoId;
+        $this->editedTodo = $this->repo->getTodo($todoId)->todo;
+    }
+    public function updateTodo($todoId)
+    {
+        $validated = $this->validateOnly('editedTodo');
+        $this->repo->update($todoId, $validated['editedTodo']);
+        $this->cancelEdit();
+    }
+
+    public function cancelEdit()
+    {
+        $this->edit = '';
     }
     public function render()
     {
