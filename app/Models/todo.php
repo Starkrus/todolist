@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class todo extends Model
 {
     use HasFactory;
+    protected $gurded = [];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
