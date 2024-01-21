@@ -46,6 +46,16 @@ class Todo extends Component
     {
         $this->edit = '';
     }
+
+    public function deleteTodo($todoId)
+    {
+        $this->repo->delete($todoId);
+    }
+
+    public function markCompleted($todoId)
+    {
+        return $this->repo->completed($todoId);
+    }
     public function render()
     {
         $todos = $this->repo->fetchAll();

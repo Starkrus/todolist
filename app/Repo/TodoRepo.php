@@ -30,4 +30,14 @@ class TodoRepo
             'todo' => $editedTodo
         ]);
     }
+
+    public function completed($todoId)
+    {
+        $todo = $this->getTodo($todoId);
+        return ($todo->is_completed) ? $todo->update(['is_completed' => false]) : $todo->update(['is_completed' => true]);
+    }
+    public function delete($todoId)
+    {
+        return $this->getTodo($todoId)->delete();
+    }
 }
